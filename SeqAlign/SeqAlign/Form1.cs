@@ -31,13 +31,38 @@ namespace SeqAlign
         List<string> showPerm<T>(IEnumerable<T> input, int count)
         {
             List<string> temp = new List<string>();
-
+            GC.Collect();
             foreach (IEnumerable<T> permutation in PermuteUtils.Permute<T>(input, count))
             {
 
                 string curStr = "";
                 foreach (T i in permutation)
                 {
+                    //GC.Collect();
+                    curStr += i.ToString();
+                    //resultsTb.AppendText(i.ToString())
+                    //Console.Write(" " + i);
+                }
+                temp.Add(curStr);
+                /*resultsTb.AppendText(Environment.NewLine);
+                resultsTb.AppendText(Environment.NewLine);
+                resultsTb.AppendText(Environment.NewLine);*/
+            }
+
+            return temp;
+        }
+
+        List<string> showPermJ(JArray input, int count)
+        {
+            List<string> temp = new List<string>();
+
+            foreach (JArray permutation in PermuteUtils.Permute(input, count))
+            {
+
+                string curStr = "";
+                foreach (JArray i in permutation)
+                {
+                    //GC.Collect();
                     curStr += i.ToString();
                     //resultsTb.AppendText(i.ToString())
                     //Console.Write(" " + i);
@@ -54,9 +79,17 @@ namespace SeqAlign
         public Form1()
         {
             InitializeComponent();
+         
+            var json1 = System.IO.File.ReadAllText(@"C:\Users\Yuxiang\Desktop\uoghackaton16\genomePieces\1k_digest_DE");
+            var json2 = System.IO.File.ReadAllText(@"C:\Users\Yuxiang\Desktop\uoghackaton16\genomePieces\1k_digest_DE");
+
+            var objects1 = JArray.Parse(json1);// parse as array  
+            //string[] objects2 = JArray.Parse(json2).Select(jv => (string)jv).ToArray(); // parse as array  
 
 
-            string[] stringInput = { "FDFCAFDFFAABCBABDCDBCAEEEEAAAFCEFCFDECDCAFFFCBDADECAFACEFDBDCCAFCEDFEDBCAAFFCCBECDAAFBABBEDDBEEBCFACFBACDACCCBFDABDCDCACBADEDFCEEDA",
+
+
+            /*string[] stringInput = { "FDFCAFDFFAABCBABDCDBCAEEEEAAAFCEFCFDECDCAFFFCBDADECAFACEFDBDCCAFCEDFEDBCAAFFCCBECDAAFBABBEDDBEEBCFACFBACDACCCBFDABDCDCACBADEDFCEEDA",
                                     "FDAFFBEDBFBACCFBBBDEFBEDA",
                                     "CCACFADAADAADFDFECFBCFDDBDDFFFFDADBFEEFDADCBFDFBDBFBDCDAFBFBEDFBCDEDCCABDADAECCBBAAFACCBEADECFFFDECFDBEBEECAFEECABCEABFCBABEADCEEBABDCFDEDDABCBFADAFDBFFEFAFACDCEFCBEEBDBEBFFAEDCCBADBABDCEDDDEDCDCDFCEBAAAAEDA",
                                     "AECACCBBCFFEFADCEEDFDDDBDADEDA",
@@ -65,21 +98,39 @@ namespace SeqAlign
 
             string[] stringInput2 = { "BFBEABBDFACFBCEEDFEEDFEFDDDCBAABBACFEBDDFACECBBCAEEAFFBDADDBAEFDEEDCCEBCCDFCDACFCBBBABDDDDDFCFFBDBBABCDCCADFBFCFBCDCADAFDBDACCDDCEACAADABAEFAEEEEFBBDECDCADABECAFDEAEEDBCFEFAAAECBAEEBFEEBDEECFBBACBFFCEEECBEFDFFCFFEFBCEAFCCADAAEEEBEEACAABFABACDDACFEBDBFCEDBABAFABEFEAFBDBAFCAFEBADACCAEEFEECACBEEDBEACEEFAFFEBEAEBFBBFCDCBACBAABCABACBFBEEDBDEEAADDFBDBEDFCBFBEBDBAEBAAAFFFDDFEEFCEBFEFBCCFFDCDFEEABDDDDDEEFFEEDAAECACCBBCFFEFADCEEDFDDDBDADEDAFDFCAFDFFAABCBABDCDBCAEEEEAAAFCEFCFDECDCAFFFCBDADECAFACEFDBDCCAFCEDFEDBCAAFFCCBECDAAFBABBEDDBEEBCFACFBACDACCCBFDABDCDCACBADEDFCEEDAFDAFFBEDBFBACCFBBBDEFBEDABCDCBDFFDFDBAFBDCEEABECAFAEEDFDDEFEFFDAADEDCFACCDEBAAACDDBFBACEBBBFEBCDCACDFBBBBDDDACBCBDDBCBFCECCFFBCDAEECFABEBDFDFFCEBAFED",
                                         "CCACFADAADAADFDFECFBCFDDBDDFFFFDADBFEEFDADCBFDFBDBFBDCDAFBFBEDFBCDEDCCABDADAECCBBAAFACCBEADECFFFDECFDBEBEECAFEECABCEABFCBABEADCEEBABDCFDEDDABCBFADAFDBFFEFAFACDCEFCBEEBDBEBFFAEDCCBADBABDCEDDDEDCDCDFCEBAAAAEDAFFDEACDCDABCCFCDABBDFCCFEADBDBFBACFAFCDCFFBDEEEBCADABCECECBBECFECBABBFDEEDDFAD"};
+            */
             //ShowPermutations<string>(stringInput, stringInput.Length);
 
-            List<string> aa = showPerm<string>(stringInput, stringInput.Length);
-            List<string> bb = showPerm<string>(stringInput2, stringInput2.Length);
+            //List<string> aa = showPerm<string>(stringInput, stringInput.Length);
+            //List<string> bb = showPerm<string>(stringInput2, stringInput2.Length);
 
-            var common = aa.Intersect(bb).ToArray();
+            List<string> aa = new List<string>();
 
-            /*List<string> myResult = showPerm<string>(stringInput, stringInput.Length);
+            for (int i = 0; i < objects1.Count; i++)
+            {
+                aa.Add(objects1[i].ToString());
+            }
+            string[] aaa = aa.ToArray();
+
+            /*for(int i = 0; i < aaa.Length; i++)
+            {
+                resultsTb.AppendText(aaa[i]);
+                resultsTb.AppendText(Environment.NewLine);
+            }*/
+
+            //List<string> bb = showPerm<string>(objects2, objects2.Length);
+
+            //var common = aa.Intersect(bb).ToArray();
+
+            List<string> myResult = showPerm<string>(aaa, aaa.Length);
+            
             foreach (string item in myResult)
             {
                 resultsTb.AppendText(item);
                 resultsTb.AppendText(Environment.NewLine);
                 resultsTb.AppendText(Environment.NewLine);
                 resultsTb.AppendText(Environment.NewLine);
-            }*/
+            }
 
             /*for(int i = 0; i < common.Length; i++)
             {
@@ -89,15 +140,7 @@ namespace SeqAlign
                 resultsTb.AppendText(Environment.NewLine);
             }*/
 
-            string text = System.IO.File.ReadAllText(@"C:\Users\Yuxiang\Desktop\uoghackaton16\genomePieces\1k_digest_DFAD");
-
-
-            var json = System.IO.File.ReadAllText(@"C:\Users\Yuxiang\Desktop\uoghackaton16\genomePieces\1k_digest_DFAD");
-
-            var objects = JArray.Parse(json); // parse as array  
-
-
-            resultsTb.AppendText(objects[0].ToString());
+            //resultsTb.AppendText(objects[0].ToString());
         }
     }
 }
