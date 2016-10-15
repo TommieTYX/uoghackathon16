@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace uoghackathon
+namespace SeqAlign
 {
     public class PermuteUtils
     {
