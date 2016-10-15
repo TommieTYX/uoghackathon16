@@ -44,6 +44,7 @@ namespace SeqAlign
                     //Console.Write(" " + i);
                 }
                 temp.Add(curStr);
+                curStr = null;
                 /*resultsTb.AppendText(Environment.NewLine);
                 resultsTb.AppendText(Environment.NewLine);
                 resultsTb.AppendText(Environment.NewLine);*/
@@ -80,10 +81,11 @@ namespace SeqAlign
         {
             InitializeComponent();
          
-            var json1 = System.IO.File.ReadAllText(@"C:\Users\Yuxiang\Desktop\uoghackaton16\genomePieces\1k_digest_DE");
-            var json2 = System.IO.File.ReadAllText(@"C:\Users\Yuxiang\Desktop\uoghackaton16\genomePieces\1k_digest_DE");
+            var json1 = System.IO.File.ReadAllText(@"C:\Users\Yuxiang\Desktop\uoghackaton16\genomePieces\1k_digest_DFAD");
+            var json2 = System.IO.File.ReadAllText(@"C:\Users\Yuxiang\Desktop\uoghackaton16\genomePieces\1k_digest_EDA");
 
             var objects1 = JArray.Parse(json1);// parse as array  
+            var objects2 = JArray.Parse(json2);// parse as array  
             //string[] objects2 = JArray.Parse(json2).Select(jv => (string)jv).ToArray(); // parse as array  
 
 
@@ -105,12 +107,17 @@ namespace SeqAlign
             //List<string> bb = showPerm<string>(stringInput2, stringInput2.Length);
 
             List<string> aa = new List<string>();
+            List<string> bb = new List<string>();
 
             for (int i = 0; i < objects1.Count; i++)
             {
                 aa.Add(objects1[i].ToString());
             }
-            string[] aaa = aa.ToArray();
+
+            for (int i = 0; i < objects2.Count; i++)
+            {
+                bb.Add(objects2[i].ToString());
+            }
 
             /*for(int i = 0; i < aaa.Length; i++)
             {
@@ -122,9 +129,12 @@ namespace SeqAlign
 
             //var common = aa.Intersect(bb).ToArray();
 
-            List<string> myResult = showPerm<string>(aaa, aaa.Length);
-            
-            foreach (string item in myResult)
+            //List<string> myResult = showPerm<string>(aaa, aaa.Length);
+            List<string> myResult1 = showPerm<string>(aa, aa.Count);
+            List<string> myResult2 = showPerm<string>(bb, bb.Count);
+            var common = myResult1.Intersect(myResult2).ToArray();
+
+            foreach (string item in common)
             {
                 resultsTb.AppendText(item);
                 resultsTb.AppendText(Environment.NewLine);
