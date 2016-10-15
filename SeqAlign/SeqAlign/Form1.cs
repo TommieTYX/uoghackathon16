@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -80,13 +81,18 @@ namespace SeqAlign
                 resultsTb.AppendText(Environment.NewLine);
             }*/
 
-            for(int i = 0; i < common.Length; i++)
+            /*for(int i = 0; i < common.Length; i++)
             {
                 resultsTb.AppendText(common[i]);
                 resultsTb.AppendText(Environment.NewLine);
                 resultsTb.AppendText(Environment.NewLine);
                 resultsTb.AppendText(Environment.NewLine);
-            }
+            }*/
+
+            string text = System.IO.File.ReadAllText(@"C:\Users\Yuxiang\Desktop\uoghackaton16\genomePieces\1k_digest_DFAD");
+            string json = JsonConvert.SerializeObject(text);
+            System.Console.WriteLine("Contents of WriteText.txt = {0}", text);
+            resultsTb.AppendText(text);
         }
     }
 }
