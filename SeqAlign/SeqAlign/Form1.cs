@@ -1,4 +1,4 @@
-﻿using Newtonsoft.Json;
+﻿using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -90,9 +90,14 @@ namespace SeqAlign
             }*/
 
             string text = System.IO.File.ReadAllText(@"C:\Users\Yuxiang\Desktop\uoghackaton16\genomePieces\1k_digest_DFAD");
-            string json = JsonConvert.SerializeObject(text);
-            System.Console.WriteLine("Contents of WriteText.txt = {0}", text);
-            resultsTb.AppendText(text);
+
+
+            var json = System.IO.File.ReadAllText(@"C:\Users\Yuxiang\Desktop\uoghackaton16\genomePieces\1k_digest_DFAD");
+
+            var objects = JArray.Parse(json); // parse as array  
+
+
+            resultsTb.AppendText(objects[0].ToString());
         }
     }
 }
