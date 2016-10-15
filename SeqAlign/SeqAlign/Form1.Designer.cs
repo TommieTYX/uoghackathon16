@@ -33,19 +33,21 @@
             // 
             // resultsTb
             // 
-            this.resultsTb.Location = new System.Drawing.Point(13, 13);
+            this.resultsTb.Location = new System.Drawing.Point(9, 8);
+            this.resultsTb.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.resultsTb.Multiline = true;
             this.resultsTb.Name = "resultsTb";
             this.resultsTb.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.resultsTb.Size = new System.Drawing.Size(1110, 566);
+            this.resultsTb.Size = new System.Drawing.Size(741, 369);
             this.resultsTb.TabIndex = 0;
             // 
             // Form1
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1135, 591);
+            this.ClientSize = new System.Drawing.Size(818, 419);
             this.Controls.Add(this.resultsTb);
+            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.Name = "Form1";
             this.Text = "Form1";
             this.ResumeLayout(false);
