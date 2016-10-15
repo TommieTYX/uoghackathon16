@@ -27,6 +27,29 @@ namespace SeqAlign
             }
         }
 
+        List<string> showPerm<T>(IEnumerable<T> input, int count)
+        {
+            List<string> temp = new List<string>();
+
+            foreach (IEnumerable<T> permutation in PermuteUtils.Permute<T>(input, count))
+            {
+
+                string curStr = "";
+                foreach (T i in permutation)
+                {
+                    curStr += i.ToString();
+                    //resultsTb.AppendText(i.ToString())
+                    //Console.Write(" " + i);
+                }
+                temp.Add(curStr);
+                /*resultsTb.AppendText(Environment.NewLine);
+                resultsTb.AppendText(Environment.NewLine);
+                resultsTb.AppendText(Environment.NewLine);*/
+            }
+
+            return temp;
+        }
+
         public Form1()
         {
             InitializeComponent();
@@ -38,7 +61,32 @@ namespace SeqAlign
                                     "AECACCBBCFFEFADCEEDFDDDBDADEDA",
                                     "FFDEACDCDABCCFCDABBDFCCFEADBDBFBACFAFCDCFFBDEEEBCADABCECECBBECFECBABBFDEEDDFADBFBEABBDFACFBCEEDFEEDFEFDDDCBAABBACFEBDDFACECBBCAEEAFFBDADDBAEFDEEDCCEBCCDFCDACFCBBBABDDDDDFCFFBDBBABCDCCADFBFCFBCDCADAFDBDACCDDCEACAADABAEFAEEEEFBBDECDCADABECAFDEAEEDBCFEFAAAECBAEEBFEEBDEECFBBACBFFCEEECBEFDFFCFFEFBCEAFCCADAAEEEBEEACAABFABACDDACFEBDBFCEDBABAFABEFEAFBDBAFCAFEBADACCAEEFEECACBEEDBEACEEFAFFEBEAEBFBBFCDCBACBAABCABACBFBEEDBDEEAADDFBDBEDFCBFBEBDBAEBAAAFFFDDFEEFCEBFEFBCCFFDCDFEEABDDDDDEEFFEEDA",
                                     "BCDCBDFFDFDBAFBDCEEABECAFAEEDFDDEFEFFDAADEDCFACCDEBAAACDDBFBACEBBBFEBCDCACDFBBBBDDDACBCBDDBCBFCECCFFBCDAEECFABEBDFDFFCEBAFED"};
-            ShowPermutations<string>(stringInput, stringInput.Length);
+
+            string[] stringInput2 = { "BFBEABBDFACFBCEEDFEEDFEFDDDCBAABBACFEBDDFACECBBCAEEAFFBDADDBAEFDEEDCCEBCCDFCDACFCBBBABDDDDDFCFFBDBBABCDCCADFBFCFBCDCADAFDBDACCDDCEACAADABAEFAEEEEFBBDECDCADABECAFDEAEEDBCFEFAAAECBAEEBFEEBDEECFBBACBFFCEEECBEFDFFCFFEFBCEAFCCADAAEEEBEEACAABFABACDDACFEBDBFCEDBABAFABEFEAFBDBAFCAFEBADACCAEEFEECACBEEDBEACEEFAFFEBEAEBFBBFCDCBACBAABCABACBFBEEDBDEEAADDFBDBEDFCBFBEBDBAEBAAAFFFDDFEEFCEBFEFBCCFFDCDFEEABDDDDDEEFFEEDAAECACCBBCFFEFADCEEDFDDDBDADEDAFDFCAFDFFAABCBABDCDBCAEEEEAAAFCEFCFDECDCAFFFCBDADECAFACEFDBDCCAFCEDFEDBCAAFFCCBECDAAFBABBEDDBEEBCFACFBACDACCCBFDABDCDCACBADEDFCEEDAFDAFFBEDBFBACCFBBBDEFBEDABCDCBDFFDFDBAFBDCEEABECAFAEEDFDDEFEFFDAADEDCFACCDEBAAACDDBFBACEBBBFEBCDCACDFBBBBDDDACBCBDDBCBFCECCFFBCDAEECFABEBDFDFFCEBAFED",
+                                        "CCACFADAADAADFDFECFBCFDDBDDFFFFDADBFEEFDADCBFDFBDBFBDCDAFBFBEDFBCDEDCCABDADAECCBBAAFACCBEADECFFFDECFDBEBEECAFEECABCEABFCBABEADCEEBABDCFDEDDABCBFADAFDBFFEFAFACDCEFCBEEBDBEBFFAEDCCBADBABDCEDDDEDCDCDFCEBAAAAEDAFFDEACDCDABCCFCDABBDFCCFEADBDBFBACFAFCDCFFBDEEEBCADABCECECBBECFECBABBFDEEDDFAD"};
+            //ShowPermutations<string>(stringInput, stringInput.Length);
+
+            List<string> aa = showPerm<string>(stringInput, stringInput.Length);
+            List<string> bb = showPerm<string>(stringInput2, stringInput2.Length);
+
+            var common = aa.Intersect(bb).ToArray();
+
+            /*List<string> myResult = showPerm<string>(stringInput, stringInput.Length);
+            foreach (string item in myResult)
+            {
+                resultsTb.AppendText(item);
+                resultsTb.AppendText(Environment.NewLine);
+                resultsTb.AppendText(Environment.NewLine);
+                resultsTb.AppendText(Environment.NewLine);
+            }*/
+
+            for(int i = 0; i < common.Length; i++)
+            {
+                resultsTb.AppendText(common[i]);
+                resultsTb.AppendText(Environment.NewLine);
+                resultsTb.AppendText(Environment.NewLine);
+                resultsTb.AppendText(Environment.NewLine);
+            }
         }
     }
 }
